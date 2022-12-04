@@ -1,7 +1,6 @@
 package day02
 
 import (
-	"fmt"
 	"strings"
 )
 
@@ -61,6 +60,5 @@ func Part2(input []string) int {
 			myScore += 3
 		}
 	}
-	fmt.Println("My score:", myScore)
 	return myScore
 }
