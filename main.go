@@ -29,8 +29,8 @@ type challenge struct {
 }
 
 func main() {
-	fmt.Println("***** AoC 2022 *****")
-	fmt.Println("***** Lets GOOO *****")
+	fmt.Printf("%s****** AoC 2022 ******\n", colours[2])
+	fmt.Println("***** Lets GOOOO *****")
 
 	seed := rand.NewSource((time.Now().UnixNano()))
 	random := rand.New(seed)
@@ -46,36 +46,64 @@ func main() {
 		fmt.Printf("%sRunning day %d...\n", dayChallenge.colour, dayChallenge.number)
 		dayChallenge.work()
 	}
-
 }
 
 func d1() {
 	input := utils.ReadMultiLine("./day01/input.txt")
-	fmt.Println("Part1:", day01.Part1(input))
-	fmt.Println("Part2:", day01.Part2(input))
+	start := time.Now()
+	part1 := day01.Part1(input)
+	elapsed := time.Since(start)
+	fmt.Printf("Part1 answer: %v done in %s\n", part1, elapsed)
+	start = time.Now()
+	part2 := day01.Part2(input)
+	elapsed = time.Since(start)
+	fmt.Printf("Part2 answer: %v done in %s\n", part2, elapsed)
 }
 
 func d2() {
 	input := utils.ReadMultiLine("./day02/input.txt")
-	fmt.Println("Part1:", day02.Part1(input))
-	fmt.Println("Part2:", day02.Part2(input))
+	start := time.Now()
+	part1 := day02.Part1(input)
+	elapsed := time.Since(start)
+	fmt.Printf("Part1 answer: %v done in %s\n", part1, elapsed)
+	start = time.Now()
+	part2 := day02.Part2(input)
+	elapsed = time.Since(start)
+	fmt.Printf("Part2 answer: %v done in %s\n", part2, elapsed)
 }
 
 func d3() {
 	input := utils.ReadMultiLine("./day03/input.txt")
-	fmt.Println("Part1:", day03.Part1(input))
-	fmt.Println("Part2:", day03.Part2(input))
-
+	start := time.Now()
+	part1 := day03.Part1(input)
+	elapsed := time.Since(start)
+	fmt.Printf("Part1 answer: %v done in %s\n", part1, elapsed)
+	start = time.Now()
+	part2 := day03.Part2(input)
+	elapsed = time.Since(start)
+	fmt.Printf("Part2 answer: %v done in %s\n", part2, elapsed)
 }
 
 func d4() {
 	input := utils.ReadMultiLine("./day04/input.txt")
-	fmt.Println("Part1:", day04.Part1(input))
-	fmt.Println("Part2:", day04.Part2(input))
+	start := time.Now()
+	part1 := day04.Part1(input)
+	elapsed := time.Since(start)
+	fmt.Printf("Part1 answer: %v done in %s\n", part1, elapsed)
+	start = time.Now()
+	part2 := day04.Part2(input)
+	elapsed = time.Since(start)
+	fmt.Printf("Part2 answer: %v done in %s\n", part2, elapsed)
 }
 
 func d5() {
 	input := utils.ReadMultiLine("./day05/input.txt")
-	fmt.Println("Part1:", day05.Part1(input))
-	fmt.Println("Part2:", day05.Part2(input))
+	start := time.Now()
+	part1 := day05.Part1(input)
+	elapsed := time.Since(start)
+	fmt.Printf("Part1 answer: %v done in %s\n", part1, elapsed)
+	start = time.Now()
+	part2 := day05.Part2(input)
+	elapsed = time.Since(start)
+	fmt.Printf("Part2 answer: %v done in %s\n", part2, elapsed)
 }
