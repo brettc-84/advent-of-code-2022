@@ -4,7 +4,7 @@ import (
 	"strconv"
 )
 
-func Part1(input []string) int {
+func Part1(input []string) string {
 
 	var max = 0
 
@@ -21,5 +21,5 @@ func Part1(input []string) int {
 			elfCalories = 0
 		}
 	}
-	return max
+	return strconv.Itoa(max)
 }

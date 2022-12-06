@@ -1,6 +1,7 @@
 package day02
 
 import (
+	"strconv"
 	"strings"
 )
 
@@ -36,7 +37,7 @@ func drawGame(oppMove string, myScore int) (newScore int, myMove string) {
 	return
 }
 
-func Part2(input []string) int {
+func Part2(input []string) string {
 	var myScore = 0
 	for _, v := range input {
 		moves := strings.Split(v, " ")
@@ -60,5 +61,5 @@ func Part2(input []string) int {
 			myScore += 3
 		}
 	}
-	return myScore
+	return strconv.Itoa(myScore)
 }

@@ -1,6 +1,7 @@
 package day06
 
 import (
+	"strconv"
 	"strings"
 )
 
@@ -13,14 +14,15 @@ func hasUnique(value string) bool {
 	return true
 }
 
-func Part1(input string) int {
+func Part1(input []string) string {
+	line := input[0]
 	start := 0
-	for i := 4; i < len(input); i++ {
-		mark := input[start:i]
+	for i := 4; i < len(line); i++ {
+		mark := line[start:i]
 		if hasUnique(mark) {
-			return i
+			return strconv.Itoa(i)
 		}
 		start += 1
 	}
-	return -1
+	return ""
 }

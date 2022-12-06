@@ -1,5 +1,7 @@
 package day03
 
+import "strconv"
+
 func unique(runeSlice []rune) []rune {
 	keys := make(map[rune]bool)
 	list := []rune{}
@@ -12,7 +14,7 @@ func unique(runeSlice []rune) []rune {
 	return list
 }
 
-func Part2(input []string) int {
+func Part2(input []string) string {
 	total := 0
 	for i := 0; i < len(input)-2; i += 3 {
 		elf1 := input[i]
@@ -39,5 +41,5 @@ func Part2(input []string) int {
 		uniqueValues := unique(finalCommon)
 		total += int(getItemValue(byte(uniqueValues[0])))
 	}
-	return total
+	return strconv.Itoa(total)
 }

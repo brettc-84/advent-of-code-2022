@@ -1,8 +1,11 @@
 package day04
 
-import "strings"
+import (
+	"strconv"
+	"strings"
+)
 
-func Part2(input []string) int {
+func Part2(input []string) string {
 	result := 0
 	for _, pairs := range input {
 		assignments := strings.Split(pairs, ",")
@@ -19,5 +22,5 @@ func Part2(input []string) int {
 			result += 1
 		}
 	}
-	return result
+	return strconv.Itoa(result)
 }

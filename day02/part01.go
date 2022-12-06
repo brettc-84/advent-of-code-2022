@@ -1,10 +1,11 @@
 package day02
 
 import (
+	"strconv"
 	"strings"
 )
 
-func Part1(input []string) int {
+func Part1(input []string) string {
 
 	/*
 		Rock (A, X) 1pts
@@ -54,5 +55,5 @@ func Part1(input []string) int {
 			}
 		}
 	}
-	return myScore
+	return strconv.Itoa(myScore)
 }

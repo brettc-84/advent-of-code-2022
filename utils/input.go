@@ -17,7 +17,3 @@ func ReadMultiLine(filePath string) []string {
 	check(err)
 	return strings.Split(string(dat), "\n")
 }
-
-func ReadSingleLine(filePath string) string {
-	return ReadMultiLine(filePath)[0]
-}

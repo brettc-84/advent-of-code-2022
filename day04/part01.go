@@ -12,7 +12,7 @@ func getPoints(assignment string) (int, int) {
 	return start, end
 }
 
-func Part1(input []string) int {
+func Part1(input []string) string {
 	result := 0
 	for _, pairs := range input {
 		assignments := strings.Split(pairs, ",")
@@ -24,5 +24,5 @@ func Part1(input []string) int {
 			result += 1
 		}
 	}
-	return result
+	return strconv.Itoa(result)
 }

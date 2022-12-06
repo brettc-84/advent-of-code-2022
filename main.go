@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"math/rand"
 	"time"
 
 	"github.com/brettc-84/advent-of-code-2022/day01"
@@ -16,108 +15,48 @@ import (
 
 const colorReset = "\033[0m"
 
-var colours = [...]string{
-	"\033[31m",
-	"\033[32m",
-	"\033[33m",
-	"\033[34m",
-}
-
-type challenge struct {
+type Day struct {
 	number int
-	work   func()
+	input  []string
+	part1  func(input []string) string
+	part2  func(input []string) string
 	colour string
 }
 
+func newDay(number int, part1 func([]string) string, part2 func([]string) string) *Day {
+
+	filePath := fmt.Sprintf("./day%02d/input.txt", number)
+	input := utils.ReadMultiLine(filePath)
+
+	return &Day{number, input, part1, part2, utils.GetRandomColour()}
+}
+
+func (d *Day) Run() {
+	start := time.Now()
+	part1Result := d.part1(d.input)
+	elapsed := time.Since(start)
+	fmt.Printf("Part1 answer: %v done in %s\n", part1Result, elapsed)
+	start = time.Now()
+	part2Result := d.part2(d.input)
+	elapsed = time.Since(start)
+	fmt.Printf("Part2 answer: %v done in %s\n", part2Result, elapsed)
+}
+
 func main() {
-	fmt.Printf("%s****** AoC 2022 ******\n", colours[2])
+	fmt.Printf("%s****** AoC 2022 ******\n", utils.GetRandomColour())
 	fmt.Println("***** Lets GOOOO *****")
 
-	seed := rand.NewSource((time.Now().UnixNano()))
-	random := rand.New(seed)
-	challenges := []challenge{
-		{1, d1, colours[random.Intn(len(colours))]},
-		{2, d2, colours[random.Intn(len(colours))]},
-		{3, d3, colours[random.Intn(len(colours))]},
-		{4, d4, colours[random.Intn(len(colours))]},
-		{5, d5, colours[random.Intn(len(colours))]},
-		{6, d6, colours[random.Intn(len(colours))]},
+	completedChallenges := []Day{
+		*newDay(1, day01.Part1, day01.Part2),
+		*newDay(2, day02.Part1, day02.Part2),
+		*newDay(3, day03.Part1, day03.Part2),
+		*newDay(4, day04.Part1, day04.Part2),
+		*newDay(5, day05.Part1, day05.Part2),
+		*newDay(6, day06.Part1, day06.Part2),
 	}
 
-	for _, dayChallenge := range challenges {
+	for _, dayChallenge := range completedChallenges {
 		fmt.Printf("%sRunning day %d...\n", dayChallenge.colour, dayChallenge.number)
-		dayChallenge.work()
+		dayChallenge.Run()
 	}
-}
-
-func d1() {
-	input := utils.ReadMultiLine("./day01/input.txt")
-	start := time.Now()
-	part1 := day01.Part1(input)
-	elapsed := time.Since(start)
-	fmt.Printf("Part1 answer: %v done in %s\n", part1, elapsed)
-	start = time.Now()
-	part2 := day01.Part2(input)
-	elapsed = time.Since(start)
-	fmt.Printf("Part2 answer: %v done in %s\n", part2, elapsed)
-}
-
-func d2() {
-	input := utils.ReadMultiLine("./day02/input.txt")
-	start := time.Now()
-	part1 := day02.Part1(input)
-	elapsed := time.Since(start)
-	fmt.Printf("Part1 answer: %v done in %s\n", part1, elapsed)
-	start = time.Now()
-	part2 := day02.Part2(input)
-	elapsed = time.Since(start)
-	fmt.Printf("Part2 answer: %v done in %s\n", part2, elapsed)
-}
-
-func d3() {
-	input := utils.ReadMultiLine("./day03/input.txt")
-	start := time.Now()
-	part1 := day03.Part1(input)
-	elapsed := time.Since(start)
-	fmt.Printf("Part1 answer: %v done in %s\n", part1, elapsed)
-	start = time.Now()
-	part2 := day03.Part2(input)
-	elapsed = time.Since(start)
-	fmt.Printf("Part2 answer: %v done in %s\n", part2, elapsed)
-}
-
-func d4() {
-	input := utils.ReadMultiLine("./day04/input.txt")
-	start := time.Now()
-	part1 := day04.Part1(input)
-	elapsed := time.Since(start)
-	fmt.Printf("Part1 answer: %v done in %s\n", part1, elapsed)
-	start = time.Now()
-	part2 := day04.Part2(input)
-	elapsed = time.Since(start)
-	fmt.Printf("Part2 answer: %v done in %s\n", part2, elapsed)
-}
-
-func d5() {
-	input := utils.ReadMultiLine("./day05/input.txt")
-	start := time.Now()
-	part1 := day05.Part1(input)
-	elapsed := time.Since(start)
-	fmt.Printf("Part1 answer: %v done in %s\n", part1, elapsed)
-	start = time.Now()
-	part2 := day05.Part2(input)
-	elapsed = time.Since(start)
-	fmt.Printf("Part2 answer: %v done in %s\n", part2, elapsed)
-}
-
-func d6() {
-	input := utils.ReadSingleLine("./day06/input.txt")
-	start := time.Now()
-	part1 := day06.Part1(input)
-	elapsed := time.Since(start)
-	fmt.Printf("Part1 answer: %v done in %s\n", part1, elapsed)
-	start = time.Now()
-	part2 := day06.Part2(input)
-	elapsed = time.Since(start)
-	fmt.Printf("Part2 answer: %v done in %s\n", part2, elapsed)
 }

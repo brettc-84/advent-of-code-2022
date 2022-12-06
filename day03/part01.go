@@ -1,6 +1,7 @@
 package day03
 
 import (
+	"strconv"
 	"unicode"
 )
 
@@ -24,11 +25,11 @@ func findDuplicate(rucksack string) (string, int) {
 	return "", 0
 }
 
-func Part1(input []string) int {
+func Part1(input []string) string {
 	result := 0
 	for _, rucksack := range input {
 		_, value := findDuplicate(rucksack)
 		result += value
 	}
-	return result
+	return strconv.Itoa(result)
 }

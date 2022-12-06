@@ -30,7 +30,7 @@ func sumArray(arr [3]int) int {
 	return sum
 }
 
-func Part2(input []string) int {
+func Part2(input []string) string {
 
 	var top3 [3]int
 
@@ -44,5 +44,5 @@ func Part2(input []string) int {
 			elfCalories = 0
 		}
 	}
-	return sumArray(top3)
+	return strconv.Itoa(sumArray(top3))
 }
