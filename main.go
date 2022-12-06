@@ -10,6 +10,7 @@ import (
 	"github.com/brettc-84/advent-of-code-2022/day03"
 	"github.com/brettc-84/advent-of-code-2022/day04"
 	"github.com/brettc-84/advent-of-code-2022/day05"
+	"github.com/brettc-84/advent-of-code-2022/day06"
 	"github.com/brettc-84/advent-of-code-2022/utils"
 )
 
@@ -40,6 +41,7 @@ func main() {
 		{3, d3, colours[random.Intn(len(colours))]},
 		{4, d4, colours[random.Intn(len(colours))]},
 		{5, d5, colours[random.Intn(len(colours))]},
+		{6, d6, colours[random.Intn(len(colours))]},
 	}
 
 	for _, dayChallenge := range challenges {
@@ -104,6 +106,18 @@ func d5() {
 	fmt.Printf("Part1 answer: %v done in %s\n", part1, elapsed)
 	start = time.Now()
 	part2 := day05.Part2(input)
+	elapsed = time.Since(start)
+	fmt.Printf("Part2 answer: %v done in %s\n", part2, elapsed)
+}
+
+func d6() {
+	input := utils.ReadSingleLine("./day06/input.txt")
+	start := time.Now()
+	part1 := day06.Part1(input)
+	elapsed := time.Since(start)
+	fmt.Printf("Part1 answer: %v done in %s\n", part1, elapsed)
+	start = time.Now()
+	part2 := day06.Part2(input)
 	elapsed = time.Since(start)
 	fmt.Printf("Part2 answer: %v done in %s\n", part2, elapsed)
 }
