@@ -10,6 +10,7 @@ import (
 	"github.com/brettc-84/advent-of-code-2022/day04"
 	"github.com/brettc-84/advent-of-code-2022/day05"
 	"github.com/brettc-84/advent-of-code-2022/day06"
+	"github.com/brettc-84/advent-of-code-2022/day07"
 	"github.com/brettc-84/advent-of-code-2022/utils"
 )
 
@@ -53,6 +54,7 @@ func main() {
 		*newDay(4, day04.Part1, day04.Part2),
 		*newDay(5, day05.Part1, day05.Part2),
 		*newDay(6, day06.Part1, day06.Part2),
+		*newDay(7, day07.Part1, day07.Part2),
 	}
 
 	for _, dayChallenge := range completedChallenges {
