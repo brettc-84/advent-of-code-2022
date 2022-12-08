@@ -38,11 +38,11 @@ func (d *Day) Run() {
 	start := time.Now()
 	part1Result := d.part1(d.input)
 	elapsed := time.Since(start)
-	fmt.Printf("Part1 answer: %v done in %s\n", part1Result, elapsed)
+	fmt.Printf("Part1 answer: \x1B[4m%v\x1B[0m done in %s\n", part1Result, elapsed)
 	start = time.Now()
 	part2Result := d.part2(d.input)
 	elapsed = time.Since(start)
-	fmt.Printf("Part2 answer: %v done in %s\n", part2Result, elapsed)
+	fmt.Printf("Part2 answer: \x1B[4m%v\x1B[0m done in %s\n", part2Result, elapsed)
 }
 
 func main() {
