@@ -5,115 +5,72 @@ import (
 	"strings"
 )
 
-type File struct {
-	name string
-	size int
-}
-
-type Folder struct {
-	name   string
-	files  []File
-	dirs   map[string]*Folder
-	parent *Folder
-	size   int
-}
-
 func Part1(input []string) string {
 	result := 0
 
-	root := Folder{
-		name:  "/",
-		dirs:  make(map[string]*Folder),
-		files: make([]File, 0),
-	}
-	var currentDir = &root
-
-	// build nodes
-	for _, bash := range input {
-
-		if strings.HasPrefix(bash, "$ cd") {
-			// cd command
-			gotoDir := strings.Replace(bash, "$ cd ", "", 1)
-			if gotoDir == "/" {
-				*currentDir = root
-			} else if gotoDir == ".." {
-				currentDir = currentDir.parent
-			} else {
-				nextDir, exists := currentDir.dirs[gotoDir]
-				if !exists {
-					newDir := Folder{
-						name:   gotoDir,
-						parent: currentDir,
-						dirs:   make(map[string]*Folder),
-						files:  make([]File, 0),
-					}
-					currentDir.dirs[gotoDir] = &newDir
-					*currentDir = newDir
-				} else {
-					currentDir = nextDir
-				}
-			}
-		} else if strings.HasPrefix(bash, "$ ls") {
-			// ls command
-			continue
-		} else {
-			// result of ls
-			lsResult := strings.Split(bash, " ")
-			if lsResult[0] == "dir" {
-				// directory
-				dirName := lsResult[1]
-				_, exists := currentDir.dirs[dirName]
-				if !exists {
-					childFolder := Folder{
-						name:   dirName,
-						parent: currentDir,
-						dirs:   make(map[string]*Folder),
-						files:  make([]File, 0),
-					}
-					currentDir.dirs[dirName] = &childFolder
-				}
-			} else {
-				size, fileName := lsResult[0], lsResult[1]
-				sizeValue, _ := strconv.Atoi(size)
-				file := File{name: fileName, size: sizeValue}
-				currentDir.files = append(currentDir.files, file)
-				currentDir.size += sizeValue
-			}
+	for _, dirSize := range buildDirSizeMap(input) {
+		if dirSize <= 100000 {
+			result += dirSize
 		}
-	}
-
-	// calculate sizes
-	calcSize(&root)
-
-	for _, dir := range root.dirs {
-		if dir.size <= 100000 {
-			result += dir.size
-		}
-		result += calculateResult(dir)
 	}
 
 	return strconv.Itoa(result)
 }
 
-func calcSize(start *Folder) int {
-	if len(start.dirs) == 0 {
-		return start.size
+func buildDirSizeMap(input []string) map[string]int {
+
+	dirStack := []string{}
+	dirSizes := make(map[string]int)
+
+	for _, bash := range input {
+		if isListCommand(bash) {
+			continue
+		} else if isChangeDirCommand(bash) {
+			dirName := getDirFromCd(bash)
+			if dirName == ".." {
+				dirStack = dirStack[0 : len(dirStack)-1]
+			} else {
+				dirStack = append(dirStack, dirName)
+			}
+		} else {
+			size, _ := parseLsOutput(bash)
+			if size != "dir" {
+				sizeValue, _ := strconv.Atoi(size)
+				currentDir := dirStack[len(dirStack)-1]
+				_, exists := dirSizes[currentDir]
+				if exists {
+					dirSizes[currentDir] = dirSizes[currentDir] + sizeValue
+				} else {
+					dirSizes[currentDir] = sizeValue
+				}
+				for i := 0; i < len(dirStack)-1; i++ {
+					parentDir := dirStack[i]
+					_, exists := dirSizes[parentDir]
+					if exists {
+						dirSizes[parentDir] = dirSizes[parentDir] + sizeValue
+					} else {
+						dirSizes[parentDir] = sizeValue
+					}
+				}
+			}
+		}
 	}
-	totalSize := 0
-	for _, dir := range start.dirs {
-		totalSize += calcSize(dir)
-	}
-	start.size += totalSize
-	return start.size
+	return dirSizes
 }
 
-func calculateResult(start *Folder) int {
-	size := 0
-	for _, dir := range start.dirs {
-		if dir.size <= 100000 {
-			size += dir.size
-		}
-		size += calculateResult(dir)
-	}
-	return size
+func isListCommand(bash string) bool {
+	return strings.HasPrefix(bash, "$ ls")
+}
+
+func isChangeDirCommand(bash string) bool {
+	return strings.HasPrefix(bash, "$ cd")
+}
+
+func getDirFromCd(command string) string {
+	return strings.Replace(command, "$ cd ", "", 1)
+}
+
+func parseLsOutput(output string) (string, string) {
+	splits := strings.Split(output, " ")
+	return splits[0], splits[1]
 }
