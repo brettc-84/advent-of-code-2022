@@ -11,6 +11,7 @@ import (
 	"github.com/brettc-84/advent-of-code-2022/day06"
 	"github.com/brettc-84/advent-of-code-2022/day07"
 	"github.com/brettc-84/advent-of-code-2022/day08"
+	"github.com/brettc-84/advent-of-code-2022/day09"
 	"github.com/brettc-84/advent-of-code-2022/utils"
 )
 
@@ -108,5 +109,17 @@ func BenchmarkDay08Part2(b *testing.B) {
 	input := utils.ReadMultiLine("./day08/input.txt")
 	for i := 0; i < b.N; i++ {
 		day08.Part2(input)
+	}
+}
+func BenchmarkDay09Part1(b *testing.B) {
+	input := utils.ReadMultiLine("./day09/input.txt")
+	for i := 0; i < b.N; i++ {
+		day09.Part1(input)
+	}
+}
+func BenchmarkDay09Part2(b *testing.B) {
+	input := utils.ReadMultiLine("./day09/input.txt")
+	for i := 0; i < b.N; i++ {
+		day09.Part2(input)
 	}
 }
