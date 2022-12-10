@@ -1,7 +1,6 @@
 package day09
 
 import (
-	"fmt"
 	"strconv"
 	"strings"
 )
@@ -9,7 +8,11 @@ import (
 func Part1(input []string) string {
 	result := 0
 
-	headX, tailX, headY, tailY := 0, 0, 0, 0
+	snake := Snake{
+		head: Point{0, 0},
+		body: make([]Point, 1),
+	}
+
 	positionsVisited := make(map[string]int)
 	positionsVisited["0,0"] = 1 // start
 
@@ -18,54 +21,10 @@ func Part1(input []string) string {
 		directionMoved, stepsMoved := move[0], move[1]
 		steps, _ := strconv.Atoi(stepsMoved)
 		for i := 0; i < steps; i++ {
-			if directionMoved == "L" {
-				headX -= 1
-			} else if directionMoved == "R" {
-				headX += 1
-			} else if directionMoved == "D" {
-				headY -= 1
-			} else if directionMoved == "U" {
-				headY += 1
-			}
-			if !areTouching(headX, headY, tailX, tailY) {
-				if tailX == headX || tailY == headY {
-					switch directionMoved {
-					case "R":
-						tailX += 1
-					case "U":
-						tailY += 1
-					case "L":
-						tailX -= 1
-					case "D":
-						tailY -= 1
-					}
-				} else {
-					// diagonal move needed
-					if headX > tailX {
-						tailX += 1
-						if headY > tailY {
-							tailY += 1
-						} else {
-							tailY -= 1
-						}
-					} else if headX < tailX {
-						tailX -= 1
-						if headY > tailY {
-							tailY += 1
-						} else {
-							tailY -= 1
-						}
-					}
-				}
-				key := fmt.Sprintf("%d,%d", tailX, tailY)
-				_, alreadyVisited := positionsVisited[key]
-				if alreadyVisited {
-					positionsVisited[key] += 1
-				} else {
-					positionsVisited[key] = 1
-				}
-			}
+			snake.head.move(directionMoved)
+			snake.moveSnake()
 		}
+
 	}
 
 	result = len(positionsVisited)
@@ -73,38 +32,44 @@ func Part1(input []string) string {
 	return strconv.Itoa(result)
 }
 
-// func moveTail(headX int, headY int, tailX int, tailY int) (int int) {
-// 	if tailX == headX || tailY == headY {
-// 		// vertical move
-// 		switch directionMoved {
-// 		case "R":
-// 			tailX += 1
-// 		case "U":
-// 			tailY += 1
-// 		case "L":
-// 			tailX -= 1
-// 		case "D":
-// 			headY -= 1
-// 		}
-// 	} else {
-// 		// diagonal move needed
-// 		if headX > tailX {
-// 			tailX += 1
-// 			if headY > tailY {
-// 				tailY += 1
-// 			} else {
-// 				tailY -= 1
-// 			}
-// 		} else if headX < tailX {
-// 			tailX -= 1
-// 			if headY > tailY {
-// 				tailY += 1
-// 			} else {
-// 				tailY -= 1
-// 			}
-// 		}
-// 	}
-// }
+func (point *Point) move(direction string) {
+	switch direction {
+	case "U":
+		point.y += 1
+	case "D":
+		point.y -= 1
+	case "R":
+		point.x += 1
+	case "L":
+		point.x -= 1
+	case "UR":
+		point.x += 1
+		point.y += 1
+	case "DR":
+		point.x += 1
+		point.y -= 1
+	case "UL":
+		point.x -= 1
+		point.y += 1
+	case "DL":
+		point.x -= 1
+		point.y -= 1
+	}
+}
+
+func (snake *Snake) moveSnake() {
+	for i, cell := range snake.body {
+		var follow Point
+		if i == 0 {
+			follow = snake.head
+		} else {
+			follow = snake.body[i-1]
+		}
+		if !areTouching(follow.x, follow.y, cell.x, cell.y) {
+
+		}
+	}
+}
 
 func areTouching(headX, headY, tailX, tailY int) bool {
 	if (tailX == headX && tailY == headY) ||
