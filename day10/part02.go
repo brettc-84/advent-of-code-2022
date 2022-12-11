@@ -29,7 +29,7 @@ func Part2(input []string) string {
 		s := string(row)
 		fmt.Println(s)
 	}
-	return ""
+	return "^^ Look above ^^"
 }
 
 func cycleAndDraw(crt [][]rune, cycle *int, numberOfCyclesToExecute int, x *int, opValue int) {
