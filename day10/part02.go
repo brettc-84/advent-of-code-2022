@@ -58,7 +58,7 @@ func cycleAndDraw(crt [][]rune, cycle *int, numberOfCyclesToExecute int, x *int,
 		if drawPos >= spriteStart && drawPos <= spriteEnd {
 			crt[crtRow][drawPos] = '#'
 		} else {
-			crt[crtRow][drawPos] = '.'
+			crt[crtRow][drawPos] = ' '
 		}
 
 		*cycle += 1
