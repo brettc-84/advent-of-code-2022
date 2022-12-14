@@ -159,7 +159,7 @@ func TestPart2(t *testing.T) {
 			"noop",
 			"noop",
 		},
-			expected: ""},
+			expected: "^^ Look above ^^"},
 	}
 
 	for _, testCase := range tests {
