@@ -12,6 +12,10 @@ import (
 	"github.com/brettc-84/advent-of-code-2022/day07"
 	"github.com/brettc-84/advent-of-code-2022/day08"
 	"github.com/brettc-84/advent-of-code-2022/day09"
+	"github.com/brettc-84/advent-of-code-2022/day10"
+	"github.com/brettc-84/advent-of-code-2022/day11"
+	"github.com/brettc-84/advent-of-code-2022/day12"
+	"github.com/brettc-84/advent-of-code-2022/day14"
 	"github.com/brettc-84/advent-of-code-2022/utils"
 )
 
@@ -121,5 +125,47 @@ func BenchmarkDay09Part2(b *testing.B) {
 	input := utils.ReadMultiLine("./day09/input.txt")
 	for i := 0; i < b.N; i++ {
 		day09.Part2(input)
+	}
+}
+func BenchmarkDay10Part1(b *testing.B) {
+	input := utils.ReadMultiLine("./day10/input.txt")
+	for i := 0; i < b.N; i++ {
+		day10.Part1(input)
+	}
+}
+func BenchmarkDay11Part1(b *testing.B) {
+	input := utils.ReadMultiLine("./day11/input.txt")
+	for i := 0; i < b.N; i++ {
+		day11.Part1(input)
+	}
+}
+func BenchmarkDay11Part2(b *testing.B) {
+	input := utils.ReadMultiLine("./day11/input.txt")
+	for i := 0; i < b.N; i++ {
+		day11.Part2(input)
+	}
+}
+func BenchmarkDay12Part1(b *testing.B) {
+	input := utils.ReadMultiLine("./day12/input.txt")
+	for i := 0; i < b.N; i++ {
+		day12.Part1(input)
+	}
+}
+func BenchmarkDay12Part2(b *testing.B) {
+	input := utils.ReadMultiLine("./day12/input.txt")
+	for i := 0; i < b.N; i++ {
+		day12.Part2(input)
+	}
+}
+func BenchmarkDay14Part1(b *testing.B) {
+	input := utils.ReadMultiLine("./day14/input.txt")
+	for i := 0; i < b.N; i++ {
+		day14.Part1(input)
+	}
+}
+func BenchmarkDay14Part2(b *testing.B) {
+	input := utils.ReadMultiLine("./day14/input.txt")
+	for i := 0; i < b.N; i++ {
+		day14.Part2(input)
 	}
 }
